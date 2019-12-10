@@ -1,40 +1,40 @@
 # Project NaCl 
 
 ### Overview 
-This project is to make sure all files meet the following reqirements: 
-> Naming conventions are standardized 
-> Have 2 database 
-> > Ordered by patient, use for data keeping 
-> > Ordered by sequence, use for data processing 
-> Have a comprehensive excel sheet that will catalog all sequences aquired for each paitent w/ DOE 
+This project is to make sure all files meet the following reqirements: \\
+> Naming conventions are standardized \\
+> Have 2 database \\
+> > Ordered by patient, use for data keeping \\
+> > Ordered by sequence, use for data processing \\ 
+> Have a comprehensive excel sheet that will catalog all sequences aquired for each paitent w/ DOE \\
 
 ### Renaming 
 ##### 1. Filter 
-The following changes will be made to all files: 
-> All file names wil be uppercase 
-> CUBE > 3D 
-> SAGITTAL > SAG 
-> AXIAL > AX 
-> CORONAL > COR 
-> WHITTIER > WH
+The following changes will be made to all files: \\
+> All file names wil be uppercase \\
+> CUBE > 3D \\
+> SAGITTAL > SAG \\ 
+> AXIAL > AX \\
+> CORONAL > COR \\ 
+> WHITTIER > WH \\
 
-The follwing sequences will be filtered through:
-> 3D\_T1
-> FLAIR
-> T2
-> BOLD
-> Diffusion
-> ASL
-> SWAN
-> CSF
-> CAROTID
-> AORTA
-> CBF
-> MPR
-> CANDY\_CANE
-> ARCH
-> PROBE
+The follwing sequences will be filtered through: \\
+> 3D\_T1 \\
+> FLAIR \\
+> T2 \\
+> BOLD \\
+> Diffusion \\
+> ASL \\
+> SWAN \\
+> CSF \\
+> CAROTID \\
+> AORTA \\
+> CBF \\
+> MPR \\
+> CANDY\_CANE \\
+> ARCH \\
+> PROBE \\
 
-Things will will be filtered out:
-> Repeats (will have letter a-z attached to the end of the file name before file extension)
+Things will will be filtered out: \\
+> Repeats (will have letter a-z attached to the end of the file name before file extension) \\
 
