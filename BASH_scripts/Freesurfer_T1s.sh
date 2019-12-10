@@ -6,18 +6,23 @@ freesurfer_mri () {
 	colorLUT="/Applications/freesurfer/FreeSurferColorLUT.txt"
 	dest="/Users/baymac/Desktop/results"
 
-	read -p  "Cohort: [BR MEN WH SH]": study
+	# read -p  "Cohort: [BR MEN WH SH]": study
 
-	for d in $(find $fs_dir -name "$study*")
+	for d in $(find $SUBJECTS_DIR -name "BR*")
 	do
+		# echo "d: $d"
 		aseg_file=$d"/mri/aseg.mgz"
-		brain_file=$d"/mri/brain.mgz"
-		echo "$aseg_file"
-		echo "$brain_file"
+		brain_file=$d"/mri/T1.mgz"
+		echo "seg: $aseg_file"
+		echo " T1: $brain_file"
 		ID=$(basename $d)
 		echo "$ID"
 
-		mri_segstats --seg $aseg_file --ctab $colorLUT --nonempty --excludeid 0  --sum $dest"/"$ID".csv" --in $brain_file
+		mri_segstats --seg $aseg_file \
+								 --ctab $colorLUT \
+								 --nonempty --exclude 0 \
+								 --sum $dest"/"$ID"_T1.csv" \
+								 --in $brain_file
 	done
 
 }
@@ -27,12 +32,20 @@ freesurfer_mri () {
 # main function
 # echo "======================= Fs ======================="
 if [ "`whoami`" = "baymac" ]
-then 
-	fs_dir="/Applications/freesurfer/subjects"
-
+then
 	# read -p "Please input source directory: " src_dir
 	# read -p  Cohort: [BR MEN WH SH]: study
 
 	freesurfer_mri
 
 fi
+
+
+mri_segstats --seg BR001_3T_20170511/mri/aseg.mgz
+						 --ctab /Applications/freesurfer/FreeSurferColorLUT.txt
+						 --nonempty --exclude 0
+						 --sum /Users/baymac/Desktop/test_Br001.csv
+						 --in BR001_3T_20170511/mri/T1.mgz
+
+						 seg: /Applications/freesurfer/subjects/BR019_3T_20171220/mri/aseg.mgz
+ T1: /Applications/freesurfer/subjects/BR019_3T_20171220/mri/T1.mgz
