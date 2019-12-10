@@ -34,7 +34,7 @@ The follwing sequences will be filtered through:
 > MPR  
 > CANDY\_CANE  
 > ARCH  
-> PROBE  
+> PROBE (MRS)    
 
 Things will will be filtered out:  
 > Repeats (will have letter a-z attached to the end of the file name before file extension)  
