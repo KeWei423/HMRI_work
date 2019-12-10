@@ -1,12 +1,12 @@
 # Project NaCl 
 
 ### Overview 
-This project is to make sure all files meet the following reqirements: \\
-> Naming conventions are standardized \\
-> Have 2 database \\
-> > Ordered by patient, use for data keeping \\
-> > Ordered by sequence, use for data processing \\ 
-> Have a comprehensive excel sheet that will catalog all sequences aquired for each paitent w/ DOE \\
+This project is to make sure all files meet the following reqirements:  
+> Naming conventions are standardized  
+> Have 2 database  
+> > Ordered by patient, use for data keeping   
+> > Ordered by sequence, use for data processing   
+> Have a comprehensive excel sheet that will catalog all sequences aquired for each paitent w/ DOE  
 
 ### Renaming 
 ##### 1. Filter 
