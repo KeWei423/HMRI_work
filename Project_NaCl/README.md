@@ -39,3 +39,18 @@ The follwing sequences will be filtered through:
 Things will will be filtered out:  
 > Repeats (will have letter a-z attached to the end of the file name before file extension)  
 
+##### 2. RENAME
+The new naming convention established
+
+###### General ID
+> 2 letter cohort followed by identification number (i.e. AB1234)    
+
+###### Scan Specific
+> Perscription   
+> > Please name future T1s as FSPGR     
+> ScanType   
+> Location if exists    
+> Notes if need be   
+> > Notes must be in (), please do not put () in ()   
+> > This is where you should specify repeats if exsists   
+> > i.e. VENC, DIRECTION, INVERTED, HYPERVENTALATION, POST-PROCESS, etc     
