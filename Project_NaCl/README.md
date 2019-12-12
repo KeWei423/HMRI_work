@@ -47,7 +47,7 @@ The new naming convention established
 
 ###### Scan Specific
 > Perscription   
-> > Please name future T1s as FSPGR     
+> > Please name future anatomic T1s as FSPGR     
 > 
 > ScanType   
 > Location if exists    
