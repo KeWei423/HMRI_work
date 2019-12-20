@@ -1,16 +1,14 @@
 #!/bin/bash
 
-work_dir="/home/ke/Desktop/FS_V2/FSPGR_3D"
-t2_dir='/home/ke/Desktop/FS_V2/CUBE_T2'
-flair_dir='/home/ke/Desktop/FS_V2/CUBE_FLAIR'
+work_dir="/home/ke/Desktop/FS"
 
 for f in $(find $work_dir -type f -iname "*.nii")
 do
 
     # This is for recon-all (adpated from Ke's One-Note)
-	echo $f
-	name=$(basename $f)
-	echo $name
+    echo $f
+    name=$(basename $f)
+    echo $name
     OIFS=$IFS
     IFS='_'
     read -r -a array <<< $name
@@ -18,21 +16,10 @@ do
     f_name=${array[0]}_${array[-1]}
     f_name_final=${f_name::-10}
     echo ID: $f_name_final
-    match=${array[0]}*${array[-1]}
-    match=*${match::-10}*
-    found=`find $t2_dir -name $match`
-    if [ -z "$found" ]; then
-        found=`find $flair_dir -name $match`
-    fi
-    echo T2/FLAIR: $found
     f_dir="$work_dir"/$f_name_final
     echo $f_dir
-    if [ -z "$found" ]; then
-	    recon-all -i $f -s $f_dir -openmp 12 -parallel -autorecon-all
-    else
-	    recon-all -i $f -s $f_dir -openmp 12 -parallel -T2 $t2_path -T2pial -all
-    fi
-
+    recon-all -i $f -s $f_dir -openmp 12 -parallel -autorecon-all
+    echo ------------------- recon-all finished  -------------------
 
     # This is for the mri convert (adapted from Ke's One-Note)
     subject_dir=$FREESURFER_HOME/subjects/$f_name_final
@@ -51,6 +38,7 @@ do
     echo source $fs_T1_dir/${pid}_FS_T1.nii.gz
     echo dest   $subject_dir/${pid}_FS_T1.nii.gz
     cp $fs_T1_dir/${pid}_FS_T1.nii.gz $subject_dir
+    echo ------------------- mri convert finished  -------------------
 
 
     # This is for the T1 intensity (adpated from Ke's One-Note)
@@ -60,7 +48,7 @@ do
     mkdir -p "$t1_si"
     mri_segstats --seg $aseg_file --ctab $FREESURFER_HOME/FreeSurferColorLUT.txt --nonempty --exclude 0 --sum $t1_si/${pid}_SI.txt --in $brain_file
     cp $t1_si/${pid}_SI.txt $subject_dir
-
+    echo ------------------- T1-intensity finished  -------------------
 
     # This is for geting region masks (adpated from Karen's One-Note)
     aparc_aseg_file=$subject_dir/mri/aparc+aseg.mgz
@@ -105,4 +93,5 @@ do
     subject_masks_dir=$subject_dir/masks
     mkdir -p $subject_masks_dir
     cp $masks/${pid}* $subject_masks_dir
+    echo ------------------- masks finished  -------------------
 done
