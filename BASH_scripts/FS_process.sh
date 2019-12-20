@@ -1,6 +1,9 @@
 #!/bin/bash
 
-work_dir="/home/ke/Desktop/FS"
+work_dir="/home/ke/Desktop/FS_V2/FSPGR_3D"
+t2_dir='/home/ke/Desktop/FS_V2/CUBE_T2'
+flair_dir='/home/ke/Desktop/FS_V2/CUBE_FLAIR'
+
 for f in $(find $work_dir -type f -iname "*.nii")
 do
 
@@ -15,10 +18,20 @@ do
     f_name=${array[0]}_${array[-1]}
     f_name_final=${f_name::-10}
     echo ID: $f_name_final
+    match=${array[0]}*${array[-1]}
+    match=*${match::-10}*
+    found=`find $t2_dir -name $match`
+    if [ -z "$found" ]; then
+        found=`find $flair_dir -name $match`
+    fi
+    echo T2/FLAIR: $found
     f_dir="$work_dir"/$f_name_final
     echo $f_dir
-	# recon-all -i $f -s $f_dir -openmp 12 -parallel -autorecon-all
-
+    if [ -z "$found" ]; then
+	    recon-all -i $f -s $f_dir -openmp 12 -parallel -autorecon-all
+    else
+	    recon-all -i $f -s $f_dir -openmp 12 -parallel -T2 $t2_path -T2pial -all
+    fi
 
 
     # This is for the mri convert (adapted from Ke's One-Note)
