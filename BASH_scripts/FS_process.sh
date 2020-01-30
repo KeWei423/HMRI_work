@@ -87,9 +87,21 @@ do
     # Basal ganglia
     mri_binarize --i $aseg_file --match 11 --match 50 --match 12 --match 51 --match 13 --match 52 --o $masks/${pid}_bg_mask.nii.gz
 
-    # Ventricals
+    # All Ventricals w/ CSF
     mri_binarize --i $aparc_aseg_file --match 4 --match 5 --match 14 --match 15 --match 24 --match 31 --match 43 --match 44 --match 63 --o $masks/${pid}_all_vent_mask.nii.gz 
     
+    # Lateral Ventricals
+    mri_binarize --i $aparc_aseg_file --match 4 --match 5 --match 31 --match 43 --match 44 --match 63 --o $masks/${pid}_lat_vent_mask.nii.gz
+
+    # 3rd Ventrical
+    mri_binarize --i $aparc_aseg_file --match 14 --o $mask/${pid}_3rd_vent_mask.nii.gz
+
+    # 4th Ventrical
+    mri_binarize --i $aparc_aseg_file --match 15 --o $mask/${pid}_4th_vent_mask.nii.gz
+
+    # CSF
+    mri_binarize --i $aparc_aseg_file --match 24 --o $mask/${pid}_csf_mask.nii.gz
+
     subject_masks_dir=$subject_dir/masks
     mkdir -p $subject_masks_dir
     cp $masks/${pid}* $subject_masks_dir
