@@ -88,7 +88,7 @@ do
     mri_binarize --i $aseg_file --match 11 --match 50 --match 12 --match 51 --match 13 --match 52 --o $masks/${pid}_bg_mask.nii.gz
 
     # Ventricals
-    mri_binarize --i $aparc_aseg_file --match 4 --match 5 --match 14 --match 15 --match 24 --match 43 --match 44 --o $masks/${pid}_vent_mask.nii.gz 
+    mri_binarize --i $aparc_aseg_file --match 4 --match 5 --match 14 --match 15 --match 24 --match 31 --match 43 --match 44 --match 63 --o $masks/${pid}_all_vent_mask.nii.gz 
     
     subject_masks_dir=$subject_dir/masks
     mkdir -p $subject_masks_dir
