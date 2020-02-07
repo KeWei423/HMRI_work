@@ -2,8 +2,7 @@
 
 work_dir="/home/ke/Desktop/FS"
 
-for f in $(find $work_dir -type f -iname "*.nii")
-do
+for f in $(find $work_dir -type f -iname "*.nii"); do
 
     # This is for recon-all (adpated from Ke's One-Note)
     echo $f
@@ -18,7 +17,7 @@ do
     echo ID: $f_name_final
     f_dir="$work_dir"/$f_name_final
     echo $f_dir
-    recon-all -i $f -s $f_dir -openmp 12 -parallel -autorecon-all
+    recon-all -i $f -s $f_dir -openmp 11 -parallel -autorecon-all
     echo ------------------- recon-all finished  -------------------
 
     # This is for the mri convert (adapted from Ke's One-Note)
@@ -38,6 +37,12 @@ do
     echo source $fs_T1_dir/${pid}_FS_T1.nii.gz
     echo dest   $subject_dir/${pid}_FS_T1.nii.gz
     cp $fs_T1_dir/${pid}_FS_T1.nii.gz $subject_dir
+
+    wm_file=$subject_dir/mri/wm.mgz
+    mri_convert $wm_file $fs_T1_dir/${pid}_FS_WM.nii.gz
+    echo source $fs_T1_dir/${pid}_FS_WM.nii.gz
+    echo dest   $subject_dir/${pid}_FS_WM.nii.gz
+    cp $fs_T1_dir/${pid}_FS_WM.nii.gz $subject_dir
     echo ------------------- mri convert finished  -------------------
 
 
@@ -94,13 +99,13 @@ do
     mri_binarize --i $aparc_aseg_file --match 4 --match 5 --match 31 --match 43 --match 44 --match 63 --o $masks/${pid}_lat_vent_mask.nii.gz
 
     # 3rd Ventrical
-    mri_binarize --i $aparc_aseg_file --match 14 --o $mask/${pid}_3rd_vent_mask.nii.gz
+    mri_binarize --i $aparc_aseg_file --match 14 --o $masks/${pid}_3rd_vent_mask.nii.gz
 
     # 4th Ventrical
-    mri_binarize --i $aparc_aseg_file --match 15 --o $mask/${pid}_4th_vent_mask.nii.gz
+    mri_binarize --i $aparc_aseg_file --match 15 --o $masks/${pid}_4th_vent_mask.nii.gz
 
     # CSF
-    mri_binarize --i $aparc_aseg_file --match 24 --o $mask/${pid}_csf_mask.nii.gz
+    mri_binarize --i $aparc_aseg_file --match 24 --o $masks/${pid}_csf_mask.nii.gz
 
     subject_masks_dir=$subject_dir/masks
     mkdir -p $subject_masks_dir
