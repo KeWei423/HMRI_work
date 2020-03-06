@@ -1,4 +1,8 @@
 #!/bin/bash
+###############################################################################
+#
+################################################################################
+
 
 convert() {
     SOURCE=$1
@@ -50,8 +54,8 @@ nii_2_seqence_base(){
 
   for key in "${key_words[@]}"
   do
-    echo "*****cp $key files to $DEST_Process && $DEST_archive"
     if [[ $key == "BOLD" ]]; then
+      echo "*****cp $key files to $DEST_Process && $DEST_archive"
       for file in $(find $SOURCE -type f -mindepth 2 -name "*$key*")
       do
         # echo $file
@@ -59,6 +63,7 @@ nii_2_seqence_base(){
         cp $file $DEST_archive/$key
       done
     elif [[ $key == "FSPGR_3D" ]] || [[ $key == "CUBE_FLAIR" ]] || [[ $key == "CUBE_T2" ]]; then
+      echo "*****cp $key files to $DEST_Process && $DEST_archive"
       for file in $(find $SOURCE -type f -mindepth 2 -name "*$key*.nii" -not -name "*+C*" -not -name "*C+*")
       do
         # echo $file
@@ -66,6 +71,7 @@ nii_2_seqence_base(){
         cp $file $DEST_archive/$key
       done
     else
+      echo "*****cp $key files to $DEST_archive"
       for f in $(find $SOURCE -type f -mindepth 2 -name "*$key*.nii")
       do
         # echo "$f"
@@ -94,19 +100,19 @@ nii_2_patient_base(){
     ID=$(basename $d)
     if [[ $ID == "BR"* ]]; then
       echo "## $ID --> $BR"
-      mv -rf $d $BR/
+      mv $d $BR/
     elif [[ $ID == "EX"* ]]; then
-      echo $d
-      mv -rf $d $EX/
+      echo "## $ID --> $EX"
+      mv $d $EX/
     elif [[ $ID == "MEN"* ]]; then
-      echo $d
-      mv -rf $d $MEN/
+      echo "## $ID --> $MEN"
+      mv $d $MEN/
     elif [[ $ID == "SH"* ]]; then
-      echo $d
-      mv -rf $d $SH/
+      echo "## $ID --> $SH"
+      mv $d $SH/
     elif [[ $ID == "WH"* ]]; then
-      echo $d
-      mv -rf $d $WH/
+      echo "## $ID --> $WH"
+      mv $d $WH/
     fi
   done
   return
@@ -136,10 +142,10 @@ dcm_2_patient_base (){
 
   # study directories
   BR="/Volumes/Image_Repository/Research_Raw_DCM/BR"
-  EX="/Volumes/Image_Repository/HMRI_Raw_NII/Patient_based/EX"
-  MEN="/Volumes/Image_Repository/HMRI_Raw_NII/Patient_based/MEN"
-  SH="/Volumes/Image_Repository/HMRI_Raw_NII/Patient_based/SH"
-  WH="/Volumes/Image_Repository/HMRI_Raw_NII/Patient_based/WH/3T"
+  EX="/Volumes/Image_Repository/Research_Raw_DCM/EX"
+  MEN="/Volumes/Image_Repository/Research_Raw_DCM/MEN"
+  SH="/Volumes/Image_Repository/Research_Raw_DCM/SH"
+  WH="/Volumes/Image_Repository/Research_Raw_DCM/WH"
 
   echo "*****Archive subject DICOM into designated study folder"
 
@@ -163,8 +169,6 @@ dcm_2_patient_base (){
       rsync -av --progress $d $WH
     fi
   done
-
-  rm -rf -d $SOURCE/*
 }
 
 inputdir=$1
