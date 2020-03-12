@@ -12,32 +12,16 @@ convert() {
     do
       echo "DIR: $dir"
       ID=$(basename $dir)
-      # echo "ID: $ID"
-      #HABLE IDs don't have any chanters in front of it
-      # if [[ $ID == [0-9]* ]]; then
-      #   for serdir in $(find $dir -mindepth 2 -maxdepth 2 -type d)
-      #   do
-      #     # echo "Serdir: $serdir"
-      #     DOE=$(basename $serdir)
-      #     DOE=${DOE:0:10}
-      #     ID_DOE=$ID"_"$DOE
-      #     sequence_dir=$(basename $(dirname $serdir))
-      #
-      #     mkdir -p $DEST/$ID_DOE/$sequence_dir
-      #     dcm2niix -f %i_%p_%s_%t -w 0 -i y -o $DEST/$ID_DOE/$sequence_dir/ $serdir
-      #   done
-      # fi
-
-        for serdir in $(find $dir -mindepth 2 -maxdepth 2 -type d)
-        do
-          DOE=$(basename $(dirname $serdir))
-          ID_DOE=$ID"_"$DOE
-          sequence_dir=$(basename $serdir)
-          #echo "ID_DOE: $ID_DOE"
-          # echo "sequence_dir: $sequence_dir"
-          mkdir -p $DEST/$ID_DOE/$sequence_dir
-          dcm2niix -f %i_%p_%s_%t -w 0 -i y -o $DEST/$ID_DOE/$sequence_dir/ $serdir
-        done
+      for serdir in $(find $dir -mindepth 2 -maxdepth 2 -type d)
+      do
+        DOE=$(basename $(dirname $serdir))
+        ID_DOE=$ID"_"$DOE
+        sequence_dir=$(basename $serdir)
+        #echo "ID_DOE: $ID_DOE"
+        # echo "sequence_dir: $sequence_dir"
+        mkdir -p $DEST/$ID_DOE/$sequence_dir
+        dcm2niix -f %i_%p_%s_%t -w 0 -i y -o $DEST/$ID_DOE/$sequence_dir/ $serdir
+      done
     done
 
     #delete empty folders
