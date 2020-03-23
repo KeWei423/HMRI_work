@@ -46,7 +46,16 @@ nii_2_seqence_base(){
         cp $file $DEST_Process/$key
         cp $file $DEST_archive/$key
       done
-    elif [[ $key == "FSPGR_3D" ]] || [[ $key == "CUBE_FLAIR" ]] || [[ $key == "CUBE_T2" ]]; then
+    elif [[ $key == "FSPGR_3D" ]]
+      echo "*****cp $key files to $DEST_Process && $DEST_archive"
+      for file in $(find $SOURCE -type f -mindepth 2 -name "*$key*.nii" -not -name "*+C*" -not -name "*C+*")
+      do
+        # echo $file
+        cp $file $DEST_Process/$key
+        cp $file $DEST_Process/"WMH_FOLDER/"
+        cp $file $DEST_archive/$key
+      done
+    elif [[ $key == "CUBE_FLAIR" ]] || [[ $key == "CUBE_T2" ]]; then
       echo "*****cp $key files to $DEST_Process && $DEST_archive"
       for file in $(find $SOURCE -type f -mindepth 2 -name "*$key*.nii" -not -name "*+C*" -not -name "*C+*")
       do
