@@ -125,11 +125,11 @@ dcm_2_patient_base (){
   SOURCE=$1
 
   # study directories
-  BR="/Volumes/Image_Repository/Research_Raw_DCM/BR"
-  EX="/Volumes/Image_Repository/Research_Raw_DCM/EX"
-  MEN="/Volumes/Image_Repository/Research_Raw_DCM/MEN"
-  SH="/Volumes/Image_Repository/Research_Raw_DCM/SH"
-  WH="/Volumes/Image_Repository/Research_Raw_DCM/WH"
+  BR="/Volumes/Image_Repository/HMRI_Raw_DCM/BR"
+  EX="/Volumes/Image_Repository/HMRI_Raw_DCM/EX"
+  MEN="/Volumes/Image_Repository/HMRI_Raw_DCM/MEN"
+  SH="/Volumes/Image_Repository/HMRI_Raw_DCM/SH"
+  WH="/Volumes/Image_Repository/HMRI_Raw_DCM/WH"
 
   echo "*****Archive subject DICOM into designated study folder"
 
