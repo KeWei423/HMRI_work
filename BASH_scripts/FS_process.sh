@@ -97,7 +97,7 @@ post_recon_all () {
     echo "------------------- masks finished  -------------------" >> $post_recon_file
 }
 
-work_dir="/home/ke/Desktop/FS"
+work_dir="/home/ke/Desktop/FS3"
 
 for f in $(find $work_dir -type f -iname "*.nii"); do
 
