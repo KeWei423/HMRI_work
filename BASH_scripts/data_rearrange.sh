@@ -46,7 +46,7 @@ nii_2_seqence_base(){
         cp $file $DEST_Process/$key
         cp $file $DEST_archive/$key
       done
-    elif [[ $key == "FSPGR_3D" ]]
+    elif [[ $key == "FSPGR_3D" ]]; then
       echo "*****cp $key files to $DEST_Process && $DEST_archive"
       for file in $(find $SOURCE -type f -mindepth 2 -name "*$key*.nii" -not -name "*+C*" -not -name "*C+*")
       do

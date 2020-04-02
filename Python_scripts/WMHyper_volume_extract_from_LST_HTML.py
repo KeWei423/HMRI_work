@@ -10,11 +10,21 @@ import pandas as pd
 def get_WM_info (file_path):
 #     print(file_path)
     pathsplit='_'.join(file_path.split('/')[1:]).split('_')
-#     print("pathsplit: ", pathsplit)
+    # print("pathsplit: ", pathsplit)
+
+    ############################################
+    # for old HABLE only
+    ############################################
+    # ID=pathsplit[14]+'_'+pathsplit[-4]
+    ############################################
+
+    ################################################################
+    #for currnet
     ID_numb = [i for i in pathsplit if i.startswith('rm')]
     ID='_'.join([ID_numb[0][2:], pathsplit[-1][:-5]])
-    ID=ID[:-6]
-#     print("ID: ", ID)
+    ID=ID[:-1]
+    ################################################################
+    # print("ID: ", ID)
 
     html_file=open(file_path, 'r', encoding='utf-8')
     for i, line in enumerate(html_file):
@@ -29,7 +39,9 @@ def get_WM_info (file_path):
 
 def main ():
     # dir=input("workdir: ")
-    dir="/Users/baymac/Desktop/Data_todo/To_Process/WMH_FOLDER/FSPGR_3D"
+    # dir="/Users/baymac/Desktop/Data_todo/To_Process/WMH_FOLDER/FSPGR_3D"
+    # dir="/Volumes/Image_Repository/Processed_Research_Image/WMH/WMHyper_mask/WH_3T_BayMac/HTML_Report"
+    dir="/Volumes/Image_Repository/HABLE/WM_hyper_mask/To_Process/Baseline/MPRAGE"
     matrix = {'ID' : [],
               'Volume (ml)' : []}
 
@@ -49,8 +61,8 @@ def main ():
 
     data=pd.DataFrame(matrix).sort_values('ID')
 #     print(data)
-    data.to_csv("/Users/baymac/Desktop/WMH_CVRmanuscript_0.3.csv", index=False)
-
+    # data.to_csv("/Users/baymac/Desktop/WMH_CVRmanuscript_0.3.csv", index=False)
+    data.to_csv("/Volumes/Image_Repository/HABLE/WM_hyper_mask/To_Process/Baseline/MPRAGE/Baseline_add.csv", index=False)
     # write the matrix into an excel
     # save_as_excel(dir, matrix)
     return
