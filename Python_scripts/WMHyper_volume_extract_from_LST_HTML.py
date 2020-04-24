@@ -41,7 +41,7 @@ def main ():
     # dir=input("workdir: ")
     # dir="/Users/baymac/Desktop/Data_todo/To_Process/WMH_FOLDER/FSPGR_3D"
     # dir="/Volumes/Image_Repository/Processed_Research_Image/WMH/WMHyper_mask/WH_3T_BayMac/HTML_Report"
-    dir="/Volumes/Image_Repository/HABLE/WM_hyper_mask/To_Process/Baseline/MPRAGE"
+    dir="/Users/baymac/Desktop/Data_todo/HABLE/NII/Baseline/SeqBased/MPRAGE"
     matrix = {'ID' : [],
               'Volume (ml)' : []}
 
@@ -62,7 +62,7 @@ def main ():
     data=pd.DataFrame(matrix).sort_values('ID')
 #     print(data)
     # data.to_csv("/Users/baymac/Desktop/WMH_CVRmanuscript_0.3.csv", index=False)
-    data.to_csv("/Volumes/Image_Repository/HABLE/WM_hyper_mask/To_Process/Baseline/MPRAGE/Baseline_add.csv", index=False)
+    data.to_csv("/Users/baymac/Desktop/Data_todo/HABLE/NII/Baseline_WMHyper.csv", index=False)
     # write the matrix into an excel
     # save_as_excel(dir, matrix)
     return
