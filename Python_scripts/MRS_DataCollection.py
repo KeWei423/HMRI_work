@@ -40,7 +40,10 @@ def get_DOE(table_file_path):
     return [str] the date of exam found in the file
     """
     df=pd.read_csv(table_file_path, sep=' +', engine='python', error_bad_lines=False, skiprows=1, nrows=1, header=None, index_col=False)
-    return df.iloc[0, 3]
+    if df.iloc[0, 3] == 'presscsi':
+        return df.iloc[0, 1]
+    else:
+        return df.iloc[0, 3]
 
 
 def table_to_row(df):
@@ -102,7 +105,7 @@ def main ():
             elif (pattern in file) and file.endswith('.csv'):
                 data=read_table_file(dirpath, os.path.join(dirpath,file))
                 data_final=data_final.append(data)
-    data_final.to_csv(dir+'/MRS_test.csv')
+    data_final.to_csv(dir+'/MRS_database.csv')
     return
 
 if __name__ == '__main__': main()
